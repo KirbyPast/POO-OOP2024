@@ -24,7 +24,7 @@ int main()
 	}
 	printf("---------------------------------------\n");
 
-	const char* v = "help";
+	const char* v = nullptr;
 	m.Get(20, v);
 
 	cout << v << '\n';

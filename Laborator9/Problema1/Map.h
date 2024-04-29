@@ -45,6 +45,9 @@ public:
 	}
 
 	~Map() {
+		for (int i = 0; i < this->size; i++) {
+			delete this->data[i];
+		}
 		delete[] this->data;
 	}
 
@@ -60,14 +63,14 @@ public:
 		if (size > capacity) {
 			Node** temp = new Node*[this->capacity * 2];
 			this->capacity *= 2;
-			for (int i = 0; i < size; i++) {
-				/*temp[i]->key = this->data[i]->key;
-				temp[i]->value = this->data[i]->value;*/
+			for (int i = 0; i < this->size; i++) {
 				temp[i] = new Node(i,this->data[i]->key, this->data[i]->value);
+			}
+			for (int i = 0; i < this->size; i++) {
+				delete this->data[i];
 			}
 			delete[] this->data;
 			this->data = temp;
-			//delete[] temp;
 		}
 		this->data[size-1] = new Node(size-1,key,0);
 		return *this->data[size-1];
@@ -98,6 +101,9 @@ public:
 	}
 
 	void Clear() {
+		for (int i = 0; i < this->size; i++) {
+			delete this->data[i];
+		}
 		delete[] this->data;
 		this->size = 0;
 		this->data = new Node * [this->capacity];
